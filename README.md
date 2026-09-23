@@ -1,5 +1,7 @@
 # Router
 
+[![tests](https://github.com/zaharchenko-evgeny/model-router/actions/workflows/tests.yml/badge.svg)](https://github.com/zaharchenko-evgeny/model-router/actions/workflows/tests.yml)
+
 A Claude Code hook that decides **before every subagent delegation** which
 harness/model should do the work. Routing no longer depends on the model obeying CLAUDE.md prose.
 

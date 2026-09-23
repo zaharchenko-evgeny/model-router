@@ -1,0 +1,55 @@
+{
+  "mechanical": {
+    "description": "Mechanical, low-judgment work with an obvious outcome: rename a symbol, fix a typo, bump a version, reformat, move a file, update an import, find-and-replace, simple lookups or listing things.",
+    "examples": [],
+    "signals": {
+      "\\b(rename|typo|bump|reformat|format|lint fix|move (the )?files?|sort imports?|update imports?|find[- ]and[- ]replace|replace all|delete unused|list (all|the)|count)\\b": 3,
+      "\\b(one[- ]line|trivial|simple|quick)\\b": 1
+    },
+    "action": "allow",
+    "set": {
+      "model": "haiku"
+    }
+  },
+  "middle": {
+    "description": "Well-specified, self-contained coding with a clear spec and little ambiguity: implement one function or file, write tests to a precise description, scaffold boilerplate, a mechanical multi-file refactor.",
+    "examples": [],
+    "signals": {
+      "\\b(implement (a|the|this)? ?(function|method|class|endpoint|file)|add (unit )?tests?|write (unit )?tests?|scaffold|boilerplate|stub out|convert .* to|port .* to|add (a )?(flag|option|field|parameter))\\b": 3,
+      "\\b(refactor)\\b": 1
+    },
+    "action": "deny",
+    "message": "Router: MIDDLE tier ({reason}). Do not spawn a subagent. Invoke the `junie-with-qwen` skill with this task, then review Junie's diff before trusting it. If this is misrouted, re-issue the Agent call with [route:opus] in the prompt."
+  },
+  "intelligent": {
+    "description": "Needs real judgment or reasoning: architecture or design decisions, trade-offs, root-cause debugging, code review, security analysis, ambiguous requirements, explaining why something behaves as it does.",
+    "examples": [],
+    "signals": {
+      "\\b(architect(ure)?|design|trade-?offs?|root cause|diagnos\\w*|debug\\w*|security|threat model|review|critique|ambiguous|strategy|why (is|does|did)|which approach|evaluate|investigate|decide (between|whether)|plan (the|out))\\b": 4
+    },
+    "action": "allow",
+    "set": {
+      "model": "opus"
+    }
+  },
+  "long_run": {
+    "description": "Long-running, multi-step implementation work: build a whole feature end to end, a migration or change across the codebase, many files and many steps, work that takes a long time to complete.",
+    "examples": [],
+    "signals": {
+      "\\b(end[- ]to[- ]end|across the (whole )?(codebase|repo(sitory)?)|migrat(e|ion)|build (the|a|an) (whole |full |complete )?(feature|service|app|module|subsystem)|implement the (whole |full |entire )?(plan|spec|feature)|all (of the )?tasks)\\b": 5
+    },
+    "structural": {
+      "min_file_paths": 6,
+      "min_words": 400,
+      "weight": 2
+    },
+    "action": "allow",
+    "set": {
+      "model": "opus",
+      "isolation": "worktree"
+    },
+    "requires_git_for": [
+      "isolation"
+    ]
+  }
+}

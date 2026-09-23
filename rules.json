@@ -1,0 +1,42 @@
+{
+  "mode": "enforce",
+  "default_tier": "intelligent",
+  "skip_subagent_types": [
+    "fork",
+    "Explore",
+    "Plan",
+    "claude-code-guide",
+    "statusline-setup"
+  ],
+  "tags": {
+    "haiku": "mechanical",
+    "junie": "middle",
+    "opus": "intelligent",
+    "long": "long_run"
+  },
+  "jev": {
+    "enabled": true,
+    "endpoint": "https://api.typesafe.ai/v1/systemone",
+    "model": "jev-latest",
+    "token_env": "JEV_TOKEN",
+    "timeout_s": 5,
+    "min_confidence": 0.5,
+    "max_prompt_chars": 6000
+  },
+  "implement_nudge": {
+    "enabled": true,
+    "trigger": "\\b(implement(ation)?|execute|build it|start (coding|building|the implementation)|go ahead|let'?s (do|build|code) it|run the plan)\\b",
+    "jev_question": "Is the user asking the agent to now carry out implementation work (write or change code, execute a plan or its tasks), rather than asking a question, requesting a design, or discussing options?",
+    "min_probability": 0.7,
+    "message": "Router: this is implementation work. Act as the orchestrator: split it into self-contained tasks and dispatch each one through the Agent tool (general-purpose), so the delegation router picks the right model/harness per task. Each Agent prompt must be self-contained (goal, files, spec, how to verify) because the subagent cannot see this conversation. Keep only trivial edits (a few lines) and final verification in the main session. Follow router deny reasons (e.g. use junie-with-qwen)."
+  },
+  "learning": {
+    "enabled": true,
+    "max_examples_per_tier": 8,
+    "max_description_chars": 600,
+    "example_chars": 200,
+    "queue_prompt_chars": 2000,
+    "labeler_model": "sonnet",
+    "labeler_timeout_s": 120
+  }
+}

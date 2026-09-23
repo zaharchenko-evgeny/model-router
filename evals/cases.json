@@ -1,0 +1,35 @@
+{
+  "_comment": "Hand-labelled routing cases. Add real misroutes from ~/.claude/logs/router.jsonl here. `note` explains non-obvious labels.",
+  "tiers": [
+    {"prompt": "Rename getUser to fetchUser across api.ts and its two callers", "want": "mechanical"},
+    {"prompt": "Bump kotlin to 2.1.0 in libs.versions.toml", "want": "mechanical"},
+    {"prompt": "Find every place we read the SPACE_TOKEN env var and list file:line", "want": "mechanical"},
+    {"prompt": "Delete the unused imports flagged by detekt in these 3 files", "want": "mechanical"},
+    {"prompt": "Implement slugify(s) in utils.py: lowercase, spaces to dashes, strip accents; add pytest cases", "want": "middle"},
+    {"prompt": "Write unit tests for the RetryPolicy class covering backoff, max attempts and jitter", "want": "middle"},
+    {"prompt": "Add a --dry-run flag to the sync command that prints actions instead of executing them", "want": "middle"},
+    {"prompt": "Convert these 4 Java DTOs to Kotlin data classes, keep Jackson annotations", "want": "middle"},
+    {"prompt": "Task 3 of the plan: add the RouterConfig loader in config.py exactly as specified in the plan below", "want": "middle"},
+    {"prompt": "Task 2: implement parse_rules() in route.py. Spec: read JSON, validate tiers, return dict. Tests: tests/test_rules.py with 4 cases listed below.", "want": "middle"},
+    {"prompt": "The websocket client leaks memory after reconnects. Find the root cause", "want": "intelligent"},
+    {"prompt": "Review this diff for concurrency bugs and security issues", "want": "intelligent"},
+    {"prompt": "Should we store eval results in Postgres or S3+Parquet? Compare the trade-offs for our access patterns", "want": "intelligent"},
+    {"prompt": "Figure out why the Gradle build got 3x slower since last week", "want": "intelligent"},
+    {"prompt": "Design the module boundaries for the new plugin system", "want": "intelligent"},
+    {"prompt": "Implement the retry logic we discussed", "want": "intelligent", "note": "subagent cannot see 'what we discussed', so it must infer the spec"},
+    {"prompt": "Fix the failing test", "want": "intelligent", "note": "unknown cause"},
+    {"prompt": "Implement the approved plan in docs/plan.md: all 9 tasks, tests for each, commit after each task", "want": "long_run"},
+    {"prompt": "Migrate the whole codebase from Moshi to kotlinx.serialization", "want": "long_run"},
+    {"prompt": "Build the billing feature end to end: models, REST API, UI screens, migrations and tests", "want": "long_run"},
+    {"prompt": "Port the Python eval runner (about 30 files) to TypeScript with feature parity", "want": "long_run"}
+  ],
+  "nudge": [
+    {"prompt": "ok, looks reasonable, lets implement", "want": true},
+    {"prompt": "go ahead and execute the plan", "want": true},
+    {"prompt": "Plan approved. Start the implementation with task 1", "want": true},
+    {"prompt": "how would you implement a trie in Rust?", "want": false},
+    {"prompt": "what's the best way to implement caching here? give me options", "want": false},
+    {"prompt": "design the caching layer", "want": false},
+    {"prompt": "explain what this function does", "want": false}
+  ]
+}
